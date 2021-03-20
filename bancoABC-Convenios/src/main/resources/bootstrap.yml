@@ -1,0 +1,8 @@
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    application:
+        name: convenio-service
+    cloud:
+        config:
+            uri: http://localhost:8088

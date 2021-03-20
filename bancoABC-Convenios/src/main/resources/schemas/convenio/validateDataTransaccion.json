@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Product",
+    "description": "validacion de campos enviados por el requestBody",
+    "type": "object",
+    "properties": {
+        "tipoIdentificacion": {
+            "description": "tipo de identificacion de la persona que solicita la transaccion",
+            "type": "string",
+            "enum": [
+                "NIT",
+                "CC",
+                "CE",
+                "TI",
+                "PAS"
+            ]
+        },
+        "identificacion": {
+            "description": "numero de identificacion",
+            "type": "string"
+            
+        },
+        "nombreConvenio": {
+            "description": "nombre de la empresa a la que se le quiere realizar el pago",
+            "type": "string"
+        },
+        "tipoConvenio":{
+            "description": "tipo convenio",
+            "type": "string",
+            "enum": [
+                "AGUA",
+                "GAS",
+                "TELEFONIA",
+                "LUZ"
+            ]
+        },
+        "operacion":{
+            "description": "tipo de operacion que se va a realizar",
+            "type":"string",
+            "enum": [
+                "Pago",
+                "Consulta",
+                "Compensacion"
+            ]
+        },
+        "idConvenio":{
+            "description": "tipo de operacion que se va a realizar",
+            "type":"number"
+        }
+    },
+    "required": ["tipoIdentificacion", "identificacion", "nombreConvenio", "tipoConvenio", "operacion"]
+}
