@@ -9,25 +9,12 @@ endpoints:
   health:
     sensitive: false
 
-zuul: 
-  ignoredServices: '*'
-  host:
-    connect-timeout-millis: 20000
-    socket-timeout-millis: 20000
-
+zuul:
   routes:
     convenio-service:
       path: /convenio-service/**
       serviceId: convenio-service
-      useCommonPrefix: false
 
-hystrix:
-    command:
-        default:
-            execution:
-                isolation:
-                    thread:
-                        timeoutInMilliseconds:1000000
 
 ribbon:
   eureka:

@@ -10,10 +10,13 @@ import com.co.banco.convenios.model.ConvenioServicioDTO;
 import com.co.banco.convenios.model.DatosTransaccion;
 import com.co.banco.convenios.repository.ConvenioServicioRepository;
 import com.co.banco.convenios.services.ConvenioServicioService;
-import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.co.banco.convenios.client.PagosClient;
+import feign.Feign;
+import java.net.URI;
+import org.springframework.context.ApplicationContext;
 
 /**
  *
@@ -24,6 +27,10 @@ public class ConverServiceImpl implements ConvenioServicioService {
 
     @Autowired
     private ConvenioServicioRepository convenioServiceRepository;
+    
+    
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Override
     public ConvenioServicioDTO consultarConvenioServicio(String convenio, String nombreOperacion, String tiposervicio) {
@@ -43,6 +50,10 @@ public class ConverServiceImpl implements ConvenioServicioService {
     @Override
     public ConvenioServicioDTO realizarTransaccion(DatosTransaccion datos) {
         ConvenioServicioDTO res = consultarConvenioServicio(datos.getNombreConvenio(), datos.getOperacion(), datos.getTipoConvenio());
+        URI uri = URI.create(res.getUrl());
+        PagosClient client = Feign.builder()
+                         .target(PagosClient.class, "http://localhost:8060/");
+        res.setUrl(client.findByDepartment(uri));
         return res;
     }
 
