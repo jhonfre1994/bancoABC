@@ -4,3 +4,7 @@ spring:
     cloud:
         config:
             uri: http://localhost:8088
+            
+apiAguas:
+    url: http://130.211.116.156//servicios/pagos/v1/
+    

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author jhonfre
  */
 @RestController
-@RequestMapping("/api/v.1/convenioReservas")
+@RequestMapping("/api/v.1/transaccion")
 public class ConvenioServicioController {
 
     @Autowired

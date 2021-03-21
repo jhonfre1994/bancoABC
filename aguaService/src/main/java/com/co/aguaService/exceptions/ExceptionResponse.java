@@ -1,7 +1,7 @@
-package com.co.banco.convenios.exceptions;
+package com.co.aguaService.exceptions;
 
-import com.co.banco.convenios.model.ErrorModel;
-import java.util.Date;
+
+import com.co.aguaService.model.ErrorModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

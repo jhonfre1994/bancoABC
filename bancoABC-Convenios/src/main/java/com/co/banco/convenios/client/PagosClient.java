@@ -5,6 +5,8 @@
  */
 package com.co.banco.convenios.client;
 
+import com.co.banco.convenios.model.DatosTransaccion;
+import feign.Headers;
 import feign.RequestLine;
 import java.net.URI;
 
@@ -14,7 +16,8 @@ import java.net.URI;
  */
 public interface PagosClient {
 
-    @RequestLine("GET")
-    String findByDepartment(URI baseUri);
+    @RequestLine("POST")
+    @Headers("Content-Type: application/json")
+    public String crearTransaccion(URI baseUri, DatosTransaccion data);
 
 }

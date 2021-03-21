@@ -1,11 +1,10 @@
-package com.co.banco.convenios.exceptions;
+package com.co.aguaService.exceptions;
 
 
 
 
-import com.co.banco.convenios.exceptions.responses.HttpResponseException;
-import com.co.banco.convenios.model.ErrorModel;
-import java.util.Date;
+import com.co.aguaService.exceptions.responses.HttpResponseException;
+import com.co.aguaService.model.ErrorModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

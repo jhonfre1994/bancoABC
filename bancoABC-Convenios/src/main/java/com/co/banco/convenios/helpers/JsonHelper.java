@@ -5,7 +5,7 @@
  */
 package com.co.banco.convenios.helpers;
 
-import com.co.banco.convenios.exceptions.responses.BadRequestException;
+import com.co.banco.convenios.exceptions.responses.HttpResponseException;
 import java.io.InputStream;
 import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
@@ -34,7 +34,7 @@ public class JsonHelper {
             schema.validate(new JSONObject(jsonString));
         }catch(Exception e){
             System.out.println(e);
-            throw new BadRequestException("Error al validar la información ingresada en el json - " + e.getMessage());
+            throw new HttpResponseException(400,"","Error al validar la información ingresada en el json - " + e.getMessage());
         }
     }
     
