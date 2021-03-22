@@ -23,5 +23,6 @@ public class DatosTransaccion {
     private String nombreConvenio;
     private String tipoConvenio;
     private String operacion;
+    private Integer referenciaFactura;
 
 }

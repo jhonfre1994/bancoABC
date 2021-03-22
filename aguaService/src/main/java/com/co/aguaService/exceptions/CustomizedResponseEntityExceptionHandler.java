@@ -35,7 +35,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ExceptionHandler(HttpResponseException.class)
     public final ResponseEntity<ExceptionResponse> handleBadRequestException(HttpResponseException ex, WebRequest request) {
         HttpStatus status = HttpStatus.valueOf(ex.getStatus());
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new ErrorModel(status.getReasonPhrase(), ex.getStatus(), ex.getUrlFail(), "Error en el servicio " + serviceName ));
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new ErrorModel(status.getReasonPhrase(), ex.getStatus(), ex.getUrlFail(), ex.getDetail() ));
         return new ResponseEntity<>(exceptionResponse, status);
     }
 

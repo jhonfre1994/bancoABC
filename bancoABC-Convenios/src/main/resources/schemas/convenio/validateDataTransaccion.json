@@ -43,10 +43,10 @@
                 "Compensacion"
             ]
         },
-        "idConvenio":{
-            "description": "tipo de operacion que se va a realizar",
+        "referenciaFactura":{
+            "description": "id de la factura a ejecutar",
             "type":"number"
         }
     },
-    "required": ["tipoIdentificacion", "identificacion", "nombreConvenio", "tipoConvenio", "operacion"]
+    "required": ["tipoIdentificacion", "identificacion", "nombreConvenio", "tipoConvenio", "operacion", "referenciaFactura"]
 }

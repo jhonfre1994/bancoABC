@@ -25,15 +25,17 @@ public class PagosServiceImpl implements PagosService {
 
     @Value("${apiAguas.url}")
     private String serverURL;
-    
+
     @Override
     public String consultarFactura(DatosTransaccion data) {
         try {
-            String url = this.serverURL + "12345";
+            String url = this.serverURL + String.valueOf(data.getReferenciaFactura());
             HttpResponse<JsonNode> response = Unirest.get(url)
                     .header("Content-Type", "application/json")
                     .asJson();
-            if (response.getStatus() != HttpStatus.OK.value()) {
+            if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
+                throw new HttpResponseException(response.getStatus(), url, "La factura no existe");
+            } else if (response.getStatus() != HttpStatus.OK.value()) {
                 throw new HttpResponseException(response.getStatus(), url, response.getStatusText());
             }
             return response.getBody().getObject().toString();
@@ -46,12 +48,13 @@ public class PagosServiceImpl implements PagosService {
     @Override
     public String pagarFactura(DatosTransaccion data) {
         try {
-            String url = this.serverURL + "12345";
+            String url = this.serverURL + String.valueOf(data.getReferenciaFactura());
             HttpResponse<JsonNode> response = Unirest.post(url)
                     .header("Content-Type", "application/json")
                     .asJson();
-
-            if (response.getStatus() != HttpStatus.OK.value()) {
+            if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
+                throw new HttpResponseException(response.getStatus(), url, response.getBody().getObject().getString("mensajeBad"));
+            } else if (response.getStatus() != HttpStatus.OK.value()) {
                 throw new HttpResponseException(response.getStatus(), url, response.getStatusText());
             }
             return response.getBody().getObject().toString();
@@ -64,12 +67,14 @@ public class PagosServiceImpl implements PagosService {
     @Override
     public String compensacionFactura(DatosTransaccion data) {
         try {
-            String url = this.serverURL + "12345";
+            String url = this.serverURL + String.valueOf(data.getReferenciaFactura());
             HttpResponse<JsonNode> response = Unirest.delete(url)
                     .header("Content-Type", "application/json")
                     .asJson();
 
-           if (response.getStatus() != HttpStatus.OK.value()) {
+            if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
+                throw new HttpResponseException(response.getStatus(), url, response.getBody().getObject().getJSONObject("mensajeBad").toString());
+            } else if (response.getStatus() != HttpStatus.OK.value()) {
                 throw new HttpResponseException(response.getStatus(), url, response.getStatusText());
             }
             return response.getBody().getObject().toString();

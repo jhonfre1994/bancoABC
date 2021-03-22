@@ -14,6 +14,7 @@ import java.net.URI;
  *
  * @author jhonfre
  */
+@Headers("Reference: convenio-service")
 public interface PagosClient {
 
     @RequestLine("POST")

@@ -81,7 +81,7 @@ public class PagosAguaController {
     public ResponseEntity<?> efectuarPago(@RequestBody DatosTransaccion datosTransaccion) {
 //        String json = "{\n"
 //                + "  \"idFactura\": \"123456789\",\n"
-//                + "  \"mensajeOK\" : \"Facttura pagada correctamente\"\n"
+//                + "  \"mensajeOK\" : \"Factura pagada correctamente\"\n"
 //                + "}";
 //        return ResponseEntity.ok(json);
         return ResponseEntity.ok(pagosService.pagarFactura(datosTransaccion));
@@ -108,7 +108,7 @@ public class PagosAguaController {
     public ResponseEntity<?> compensacionFactura(@RequestBody DatosTransaccion datosTransaccion) {
 //        String json = "{\n"
 //                + "  \"idFactura\": \"123456789\",\n"
-//                + "  \"mensajeOK\" : \"Facttura compensada correctamente\"\n"
+//                + "  \"mensajeOK\" : \"Factura compensada correctamente\"\n"
 //                + "}";
 //        return ResponseEntity.ok(json);
         return ResponseEntity.ok(pagosService.compensacionFactura(datosTransaccion));
