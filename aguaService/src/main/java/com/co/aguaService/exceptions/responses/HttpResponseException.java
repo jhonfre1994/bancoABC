@@ -12,7 +12,7 @@ public class HttpResponseException extends RuntimeException {
 
     private int status;
     private String urlFail;
-    private String detail;
+    private String detail ;
 
     
 }

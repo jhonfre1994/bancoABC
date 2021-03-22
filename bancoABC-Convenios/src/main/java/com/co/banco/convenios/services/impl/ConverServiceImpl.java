@@ -14,11 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.co.banco.convenios.client.PagosClient;
 import com.co.banco.convenios.exceptions.responses.HttpResponseException;
+import com.co.banco.convenios.helpers.ErrorDecoderFeign;
 import feign.Feign;
 import java.net.URI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 
 /**
@@ -37,7 +37,6 @@ public class ConverServiceImpl implements ConvenioServicioService {
     @Value("$(url.gateway)")
     private String urlGateway;
 
-    @Override
     public ConvenioServicioDTO consultarConvenioServicio(String convenio, String nombreOperacion, String tiposervicio) {
         try {
             Map<String, Object> entityResult = convenioServiceRepository.consultarInformacionConvenio(convenio, nombreOperacion, tiposervicio);
@@ -52,16 +51,15 @@ public class ConverServiceImpl implements ConvenioServicioService {
     }
 
     @Override
-    public ConvenioServicioDTO realizarTransaccion(DatosTransaccion datos) {
-        
+    public String realizarTransaccion(DatosTransaccion datos) {
+
         ConvenioServicioDTO res = consultarConvenioServicio(datos.getNombreConvenio(), datos.getOperacion(), datos.getTipoConvenio());
         URI uri = URI.create(res.getUrl());
         PagosClient client = Feign.builder()
                 .encoder(new JacksonEncoder())
-                .decode404()
-                .target( PagosClient.class, res.getUrl());
-        res.setUrl(client.crearTransaccion(uri, datos));
-        return res;
+                .errorDecoder(new ErrorDecoderFeign())
+                .target(PagosClient.class, res.getUrl());
+        return client.crearTransaccion(uri, datos);
     }
 
 }

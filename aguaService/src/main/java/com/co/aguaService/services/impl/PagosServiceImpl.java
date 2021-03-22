@@ -25,7 +25,7 @@ public class PagosServiceImpl implements PagosService {
 
     @Value("${apiAguas.url}")
     private String serverURL;
-
+    
     @Override
     public String consultarFactura(DatosTransaccion data) {
         try {

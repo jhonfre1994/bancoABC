@@ -14,7 +14,5 @@ import com.co.banco.convenios.model.DatosTransaccion;
  */
 public interface ConvenioServicioService {
     
-    ConvenioServicioDTO consultarConvenioServicio(String convenio, String nombreOperacion, String tiposervicio);
-    
-    ConvenioServicioDTO realizarTransaccion(DatosTransaccion datos);
+    String realizarTransaccion(DatosTransaccion datos);
 }
