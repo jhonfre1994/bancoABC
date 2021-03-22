@@ -1,0 +1,149 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8060/agua-service
+  description: Generated server url
+paths:
+  /api/v.1/pagosAgua/pagoFactura:
+    post:
+      tags:
+      - pagos-agua-controller
+      summary: Servicio que consume un servicio externo de la empresa de aguapara
+        pagar una factura
+      operationId: efectuarPago
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatosTransaccion'
+        required: true
+      responses:
+        500:
+          description: Ocurrio un error al intentar consumir el servicio externo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        200:
+          description: Retorna mensaje de exito si el proceso lo realiza correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagoCompensacionResponse'
+        400:
+          description: Ocurrio un error al intentar pagar la factura
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+  /api/v.1/pagosAgua/consultarFactura:
+    post:
+      tags:
+      - pagos-agua-controller
+      summary: Servicio que consume un servicio externo de la empresa de aguapara
+        consultar la cantidad a pagar de una factura
+      operationId: consultarPago
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatosTransaccion'
+        required: true
+      responses:
+        500:
+          description: Ocurrio un error al intentar consumir el servicio externo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        200:
+          description: Retorna el precio a pagar de la factura
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsultarFacturaResponse'
+        400:
+          description: La factura no existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+  /api/v.1/pagosAgua/compensacionFactura:
+    post:
+      tags:
+      - pagos-agua-controller
+      summary: Servicio que consume un servicio externo de la empresa de aguapara
+        compensar una factura
+      operationId: compensacionFactura
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatosTransaccion'
+        required: true
+      responses:
+        500:
+          description: Ocurrio un error al intentar consumir el servicio externo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        200:
+          description: Retorna mensaje de exito si el proceso lo realiza correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagoCompensacionResponse'
+        400:
+          description: La factura no existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+components:
+  schemas:
+    DatosTransaccion:
+      type: object
+      properties:
+        tipoIdentificacion:
+          type: string
+        identificacion:
+          type: string
+        nombreConvenio:
+          type: string
+        tipoConvenio:
+          type: string
+        operacion:
+          type: string
+    ErrorModel:
+      type: object
+      properties:
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        apiFail:
+          type: string
+        detail:
+          type: string
+    PagoCompensacionResponse:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        mensajeOK:
+          type: integer
+          format: int32
+    ConsultarFacturaResponse:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        valorFactura:
+          type: integer
+          format: int32

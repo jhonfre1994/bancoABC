@@ -6,6 +6,8 @@
 package com.co.banco.convenios.helpers;
 
 import com.co.banco.convenios.exceptions.responses.HttpResponseException;
+import com.co.banco.convenios.model.ConvenioServicioDTO;
+import com.co.banco.convenios.model.DatosTransaccion;
 import java.io.InputStream;
 import org.json.JSONObject;
 import org.springframework.core.io.ClassPathResource;
@@ -19,10 +21,10 @@ import org.json.JSONTokener;
  */
 public class JsonHelper {
     
-    private String jsonString;
+    private DatosTransaccion data;
     
-    public JsonHelper(String jsonString){
-        this.jsonString = jsonString;
+    public JsonHelper(DatosTransaccion data){
+        this.data = data;
     }
     
     
@@ -31,7 +33,7 @@ public class JsonHelper {
             InputStream inputStream = new ClassPathResource("/schemas/" + schemaName).getInputStream();
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
             Schema schema = SchemaLoader.load(rawSchema);
-            schema.validate(new JSONObject(jsonString));
+            schema.validate(new JSONObject(data));
         }catch(Exception e){
             System.out.println(e);
             throw new HttpResponseException(400,"","Error al validar la información ingresada en el json - " + e.getMessage());

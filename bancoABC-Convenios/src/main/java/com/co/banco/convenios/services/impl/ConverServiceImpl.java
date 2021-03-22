@@ -34,14 +34,14 @@ public class ConverServiceImpl implements ConvenioServicioService {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Value("$(url.gateway)")
+    @Value("${url.gateway}")
     private String urlGateway;
 
     public ConvenioServicioDTO consultarConvenioServicio(String convenio, String nombreOperacion, String tiposervicio) {
         try {
             Map<String, Object> entityResult = convenioServiceRepository.consultarInformacionConvenio(convenio, nombreOperacion, tiposervicio);
             if (entityResult.isEmpty()) {
-                throw new HttpResponseException(400, "", "Ocurrio un error al consultar la información del convenio");
+                throw new HttpResponseException(404, "", "Ocurrio un error al consultar la información del convenio");
             }
             ConvenioServicioDTO convenioData = new ConvenioServicioDTO(entityResult);
             return convenioData;
@@ -54,11 +54,11 @@ public class ConverServiceImpl implements ConvenioServicioService {
     public String realizarTransaccion(DatosTransaccion datos) {
 
         ConvenioServicioDTO res = consultarConvenioServicio(datos.getNombreConvenio(), datos.getOperacion(), datos.getTipoConvenio());
-        URI uri = URI.create(res.getUrl());
+        URI uri = URI.create(urlGateway + res.getUrl());
         PagosClient client = Feign.builder()
                 .encoder(new JacksonEncoder())
                 .errorDecoder(new ErrorDecoderFeign())
-                .target(PagosClient.class, res.getUrl());
+                .target(PagosClient.class, urlGateway);
         return client.crearTransaccion(uri, datos);
     }
 

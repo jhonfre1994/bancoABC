@@ -1,0 +1,87 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8060/convenio-service
+  description: Generated server url
+paths:
+  /api/v.1/transaccion:
+    get:
+      tags:
+      - convenio-servicio-controller
+      summary: Metodo para iniciar una transaccion
+      operationId: consultarConvenio
+      parameters:
+      - name: data
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatosTransaccion'
+      responses:
+        200:
+          description: Devuelve una respuesta dependiendo del tipo de operacion solicitada
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/ConsultarFacturaResponse'
+                - $ref: '#/components/schemas/PagoCompensacionResponse'
+        404:
+          description: No encontro la información del convenio en la base de datos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        400:
+          description: Ocuerrio un error al validar la información suministrada en
+            el body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+components:
+  schemas:
+    DatosTransaccion:
+      type: object
+      properties:
+        tipoIdentificacion:
+          type: string
+        identificacion:
+          type: string
+        nombreConvenio:
+          type: string
+        tipoConvenio:
+          type: string
+        operacion:
+          type: string
+    ConsultarFacturaResponse:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        valorFactura:
+          type: integer
+          format: int32
+    PagoCompensacionResponse:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        valorFactura:
+          type: integer
+          format: int32
+    ErrorModel:
+      type: object
+      properties:
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        apiFail:
+          type: string
+        detail:
+          type: string
