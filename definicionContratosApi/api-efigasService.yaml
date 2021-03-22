@@ -1,0 +1,82 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8092/
+  description: Generated server url
+paths:
+  /api/v.1/pagosGas/pagoFactura:
+    post:
+      tags:
+      - pagos-gas-controller
+      summary: Servicio que consume un servicio externo de la empresa de gaspara pagar
+        la factura
+      operationId: pagoFactura
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatosTransaccion'
+        required: true
+      responses:
+        200:
+          description: Retorna mensaje con el valor y lareferencia de la factura
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultadoPagoRequest'
+  /api/v.1/pagosGas/consultarFactura:
+    post:
+      tags:
+      - pagos-gas-controller
+      summary: Servicio que consume un servicio externo de la empresa de gaspara consultar
+        la factura
+      operationId: consultarPago
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatosTransaccion'
+        required: true
+      responses:
+        200:
+          description: Retorna mensaje con el valor y lareferencia de la factura
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultadoConsultaRequest'
+components:
+  schemas:
+    DatosTransaccion:
+      type: object
+      properties:
+        tipoIdentificacion:
+          type: string
+        identificacion:
+          type: string
+        nombreConvenio:
+          type: string
+        tipoConvenio:
+          type: string
+        operacion:
+          type: string
+        referenciaFactura:
+          type: integer
+          format: int32
+    ResultadoPagoRequest:
+      type: object
+      properties:
+        totalPagar:
+          type: number
+          format: double
+        referenciaFactura:
+          type: string
+    ResultadoConsultaRequest:
+      type: object
+      properties:
+        totalPagar:
+          type: number
+          format: double
+        referenciaFactura:
+          type: string

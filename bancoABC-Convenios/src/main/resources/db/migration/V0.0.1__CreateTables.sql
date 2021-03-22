@@ -22,7 +22,7 @@ insert into CONVENIO(idConvenio,nombreConvenio, tipoServicio) values (2, 'Brilla
 insert into CONVENIO_SERVICIO(id, idConvenio, tipoOperacion, httpMethod, httpHeader, url ) values (1, 1, 'Consulta', 'GET', '', 'agua-service/api/v.1/pagosAgua/consultarFactura');
 insert into CONVENIO_SERVICIO(id, idConvenio, tipoOperacion, httpMethod, httpHeader, url ) values (2, 1, 'Pago', 'POST', '{\"Content-type\":\"application/json\"}', 'agua-service/api/v.1/pagosAgua/pagoFactura');
 insert into CONVENIO_SERVICIO(id, idConvenio, tipoOperacion, httpMethod, httpHeader, url ) values (3, 1, 'Compensacion', 'DELETE', '', 'agua-service/api/v.1/pagosAgua/compensacionFactura');
-insert into CONVENIO_SERVICIO(id, idConvenio, tipoOperacion, httpMethod, httpHeader, url ) values (4, 2, 'Consulta', 'GET', '', 'efigas-service/api/v.1/pagosGas');
-insert into CONVENIO_SERVICIO(id, idConvenio, tipoOperacion, httpMethod, httpHeader, url ) values (5, 2, 'Pago', 'POST', '{\"Content-type\":\"application/json\"}', 'efigas-service/api/v.1/pagosGas');
+insert into CONVENIO_SERVICIO(id, idConvenio, tipoOperacion, httpMethod, httpHeader, url ) values (4, 2, 'Consulta', 'GET', '', 'efigas-service/api/v.1/pagosGas/consultarFactura');
+insert into CONVENIO_SERVICIO(id, idConvenio, tipoOperacion, httpMethod, httpHeader, url ) values (5, 2, 'Pago', 'POST', '{\"Content-type\":\"application/json\"}', 'efigas-service/api/v.1/pagosGas/pagoFactura');
 
 
