@@ -1,11 +1,11 @@
 # AGUA SERVICE
 
-Microservicio para el manejo de las facturas de gas.
+Microservicio para el manejo de las facturas de agua y el reenvio de la informacion al servicio de la empresa de agua.
 
 ## Funcionalidades 
 
-* transformar la informacion suministrada por parte del servicio de convenio service.
-* ejecutar los servicios suminiatrados en los archivos pagos.wsdl
+* recibe la informacion del microservicio de convenios y la envia a una url externa de la empresa de agua, usando la dependecia de unirest-java.
+* se reenvia la informacion a las apis externas teniendo en cuenta la definicion en el archivo api.raml.
 
 ## Construido con 🛠️
 
@@ -19,6 +19,7 @@ Este proyecto esta construido con las siguientes tecnologias:
 * eureka client
 * openapi-ui
 * Spring cloud
+* Unirest-java
 
 
 ### El microservicio de gas esta compuesto por lo siguientes paquetes:
