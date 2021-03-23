@@ -34,7 +34,7 @@ La documentacion esta en la carpeta [definicionContratosApi](https://github.com/
 * [efigas-service](https://github.com/jhonfre1994/bancoABC/tree/master/efigasService) : transforma la información recibida de acuerdo a los wsdl suministrados.
 * [agua-service](https://github.com/jhonfre1994/bancoABC/tree/master/aguaService) : reenvia la información necesaria a las APIs REST externas suminitradas en el archivo api.raml.
 
-**NOTA: Dentro de la carpeta de cada microservicio encontrara información mas detallada sobre su contrucción.**
+**NOTA: Dentro de la carpeta de cada microservicio se encuentra información mas detallada sobre su contrucción.**
 
 ## DOCKER
 
