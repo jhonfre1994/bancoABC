@@ -64,6 +64,12 @@ La base de datos esta contruida en h2 para mayor facilidad. La siguiente imagen 
 
 ![alt text](https://github.com/jhonfre1994/bancoABC/blob/master/imagenes/convenios-modelo.png)
 
+# Direccionamiento de peticiones con OpenFeign
+
+Se usa la dependencia open feign para enrutar las peticiones a otros microservicios, la información de la base de datos sirve de  base para saber que metodo y hacia donde debe ir la petición solicitada. La unica manera de llamar una API de un microservicio es por medio de conevio-service, ya que el body que se envia en el la peticion tiene la información necesaria para saber a que microservicio dirigir la peticion final. 
+
+
+
 ## Autor ✒️
 
 * **Jhon Freddy salamanca** - [jhonfre1994](https://github.com/jhonfre1994)
